@@ -1,0 +1,25 @@
+#django-snippets
+
+1. Decorater to autherized django-pages
+
+from django.http import HttpResponse
+
+
+def module_allowed(module_name):
+    def decorator(func):
+        def wrap(request,*args,**kwargs):
+                if (condtion for your logic to check autherization for user):
+                        return func(request,*args,**kwargs)
+                else:
+                        return HttpResponse(" ⚠ You are not authorized to view this page !")
+        return wrap
+    return decorator
+
+
+#add module over django function
+from Permisiondec import module_allowed
+@module_allowed('Report')
+def reports_page(request):
+    ...
+  
+  
